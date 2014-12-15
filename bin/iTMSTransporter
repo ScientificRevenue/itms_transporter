@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# if the user has the run script in their PATH
+# then we can get the path to the script from
+# 'which'.  otherwise, we have to get the path
+# from $0
+if [ "$0" = "iTMSTransporter" ] ; then
+  SCRIPT_PATH=`which iTMSTransporter`
+else
+  SCRIPT_PATH=$0
+fi
+
+# get the script's directory
+SCRIPT_DIR=`echo $SCRIPT_PATH | awk -F"/" '{print substr($0,1,length($0)-length($NF))}'`
+
+# call the transporter relative to the script's directory
+#echo Calling: ${SCRIPT_DIR}../share/iTMSTransporter.woa/iTMSTransporter "$@"
+"${SCRIPT_DIR}../share/iTMSTransporter.woa/iTMSTransporter" "$@"
